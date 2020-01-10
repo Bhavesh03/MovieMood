@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Movie Mood</title>
+<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
+<script src="resources/bootstrap/jquery.min.js"></script>
+<script src="resources/bootstrap/js/bootstrap.min.js"></script>
+<style>
+.boxMain {
+	margin-top: 10px;
+	height: 400px;
+	border: 1px solid black;
+	border-radius: 10px;
+	padding: 10px;
+	align-content: flex-end;
+	
+    background-position: center;
+    background-size: cover;
+}
+
+.box {
+	margin-top: 30px;
+	margin-right: 30px;
+	height: 220px;
+	border: 2px solid black;
+	border-radius: 10px;
+	padding: 10px;
+	
+	background-position: center;
+    background-size: cover;
+}
+</style>
+</head>
+<body>
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-9">
+				<h1>Movie Mood</h1>
+			</div>
+			<div class="col-md-3">
+				<form action="Search" method="post" style="width:100%">
+  					<div class="input-group">
+    					<input type="text" class="form-control" name="search" id="search1" placeholder="Search"/>
+  						<button type="submit" class="btn btn-primary">Search</button>
+  					</div>
+				</form>
+			</div>
+		</div>
