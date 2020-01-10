@@ -139,28 +139,30 @@ public class MoviesDB {
 		return list;
 	}
 
-	public static Movie getPapularMovie() {
-		//Sort movies based on year and limit
+	public static List<Movie> getPapularMovie() {
+		List<Movie> list = new ArrayList<Movie>();
 		List<Genre> genres = null;
-		Movie m = new Movie();
 		try {
 			Connection con = JDBCconn.getConnection();
 			PreparedStatement ps = con.prepareStatement("select * from movie");
 			ResultSet rs = ps.executeQuery();
-			rs.next();
-			m.setId(rs.getInt(1));
-			m.setTitle(rs.getString(2));
-			m.setYear(rs.getInt(3));
-			m.setLang(rs.getString(4));
-			m.setDuration(rs.getInt(5));
-			m.setImage(rs.getString(6));
-			genres = GenresDB.getGenresByMovies(rs.getInt(1));
-			m.setGenres(genres.toArray(new Genre[genres.size()]));
+			while (rs.next()) {
+				Movie m = new Movie();
+				m.setId(rs.getInt(1));
+				m.setTitle(rs.getString(2));
+				m.setYear(rs.getInt(3));
+				m.setLang(rs.getString(4));
+				m.setDuration(rs.getInt(5));
+				m.setImage(rs.getString(6));
+				genres = GenresDB.getGenresByMovies(rs.getInt(1));
+				m.setGenres(genres.toArray(new Genre[genres.size()]));
+				list.add(m);
+			}
 			con.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return m;
+		return list;
 	}
 
 	public static List<Movie> searchMovies(String title,String genre,int year) {
