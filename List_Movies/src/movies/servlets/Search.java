@@ -32,6 +32,11 @@ public class Search extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
+		int pageNo = 1;
+		if(request.getParameter("pageNo")!=null) {
+			 pageNo = Integer.parseInt(request.getParameter("pageNo"));
+		}
+		
 		PrintWriter out=response.getWriter();
 		request.getRequestDispatcher("searchheader.html").include(request, response);
 		
@@ -72,7 +77,9 @@ public class Search extends HttpServlet {
 		
 		out.println("<div class=\"row\" style=\"margin-left: 10px;\">");
 		
-			for(int i=0;i<movies.size();i++) {
+			int totalMovies = movies.size();
+			int startPageindex = (pageNo-1)*3,stopPageIndex = startPageindex+3;
+			for(int i=startPageindex;i<stopPageIndex&&i<totalMovies;i++) {
 				out.println("<div class=\"col-md-3 movie-view-search \">");
 					out.println("<div class=\"row\" style=\"height:220px; background-position:center;background-size:cover; background-image:url('"+movies.get(i).getImage()+"')\"></div>");
 						out.println("<div class=\"row\">");
@@ -83,11 +90,14 @@ public class Search extends HttpServlet {
 			}
 		out.println("</div>");
 			
+		int totalPages = (int) Math.ceil(totalMovies/3f);
+		System.out.println(totalPages);
 		
 		out.println("<ul class=\"pagination justify-content-center\" style=\"margin-left:10px\">");
-			out.println("<li class=\"page-item\"><a class=\"page-link\" href=\"ViewByStart?start=a\">2</a></li>");
+			for(int i=0;i<totalPages;i++) {
+				out.println("<li class=\"page-item\"><a class=\"page-link\" href=\"Search?pageNo="+(i+1)+"&title="+title+"&genre="+genre+"&year="+year+"\">"+(i+1)+"</a></li>");
+			}
 		out.println("</ul>");
-		
 		
 		out.println("</div>");
 		request.getRequestDispatcher("footer.html").include(request, response);

@@ -176,7 +176,7 @@ public class MoviesDB {
 			title="is not null";
 		}
 		else {
-			title="="+title;
+			title="= \""+title+"\"";
 		}
 		if(gen_id==-1) {
 			_gen_id="is not null";

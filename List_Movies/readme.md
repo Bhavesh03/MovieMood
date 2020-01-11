@@ -6,6 +6,6 @@ Also configure Eclipse for Java Servlet.
 
 Create database using movie.sql from List_Movies/WebContent/movie.sql.
 
-Run project from Eclipse and navigate to loacalhost:8080/Home.
+Run project from Eclipse and navigate to localhost:8080/List_Movies/Home.
 
  
